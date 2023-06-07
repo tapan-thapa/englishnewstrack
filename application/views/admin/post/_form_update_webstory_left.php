@@ -1,0 +1,138 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <div class="left">
+            <h3 class="box-title"><?php echo trans('post_details'); ?></h3>
+        </div>
+    </div><!-- /.box-header -->
+
+    <div class="box-body">
+        <!-- include message block -->
+        <?php $this->load->view('admin/includes/_messages'); ?>
+
+        <?php if (!empty($this->session->userdata('msg_error'))): ?>
+            <div class="m-b-15">
+                <div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>
+                        <i class="icon fa fa-times"></i>
+                        <?php echo $this->session->userdata('msg_error');
+                        $this->session->unset_userdata('msg_error'); ?>
+                    </h4>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <!--print custom success message-->
+        <?php if (!empty($this->session->userdata('msg_success'))): ?>
+            <div class="m-b-15">
+                <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>
+                        <i class="icon fa fa-check"></i>
+                        <?php echo $this->session->userdata('msg_success');
+                        $this->session->unset_userdata('msg_success') ?>
+                    </h4>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <input type="hidden" name="id" value="<?php echo html_escape($post->id); ?>">
+        <input type="hidden" name="referrer" class="form-control" value="<?php echo $this->agent->referrer(); ?>">
+		<!-- <div class="form-group">
+			<label class="control-label">Topic</label>
+			<input type="text" id="wr_input_post_topic" class="form-control" name="topic" placeholder="Topic"
+				   value="<?php //echo html_escape($post->topic); ?>" <?php //echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> >
+		</div> -->
+		
+		<!-- <div class="form-group">
+			<label class="control-label">Headline</label>
+			<input type="text" id="wr_input_post_headline" class="form-control" name="headline" placeholder="Headline"
+				   value="<?php //echo html_escape($post->headline); ?>" <?php //echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> >
+		</div> -->
+        <div class="form-group">
+            <label class="control-label"><?php echo trans('title'); ?><small> (Limit: 120 characters)</small></label>
+            <div class="wordCount">Words : <span id="wr_input_post_title_word">0</span></div>
+            <textarea class="form-control text-area inputwordcount"
+                      name="title" maxlength="120" id="wr_input_post_title" word-json='{"word":25,"showID":"wr_input_post_title_word","show":1}' placeholder="<?php echo trans('title'); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required><?php echo html_escape($post->title); ?></textarea>
+            <!-- <input type="text" maxlength="120" class="form-control" name="title" placeholder="<?php echo trans('title'); ?>"
+                   value="<?php echo html_escape($post->title); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required> -->
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"><?php echo trans('slug'); ?>
+                <small>(<?php echo  "English"; /* trans('slug_exp'); */ ?>)</small>
+            </label>
+            <?php if($post->status!=1){ ?>
+            <div class="wordCount">Words : <span id="title_slug_word">0</span></div>
+            <?php } ?>
+            <textarea class="form-control text-area inputwordcount"
+                      name="title_slug" id="title_slug" word-json='{"word":25,"showID":"title_slug_word","show":1}' placeholder="<?php echo trans('slug'); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> <?php if($post->status==1){ ?>readonly<?php } ?> required><?php echo html_escape($post->title_slug); ?></textarea>
+            <!-- <input type="text" class="form-control" name="title_slug" placeholder="<?php echo trans('slug'); ?>"
+                   value="<?php echo html_escape($post->title_slug); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> <?php if($post->status==1){ ?>readonly<?php } ?> required> -->
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"><?php echo trans('summary'); ?> & <?php echo trans("description"); ?> (<?php echo trans('meta_tag'); ?>)</label>
+            <div class="wordCount">Words : <span id="summary_word">0</span></div>
+            <textarea class=" tinyMCESummary form-control text-area" name="summary" id="summary"
+                      placeholder="<?php echo trans('summary'); ?> & <?php echo trans("description"); ?> (<?php echo trans('meta_tag'); ?>)" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>><?php echo html_escape($post->summary); ?></textarea>
+        </div>
+		<div class="form-group">
+			<label class="control-label"><?php echo trans('meta_tag'); ?> <?php echo trans("description"); ?></label>
+            <div class="wordCount">Words : <span id="tag_description_word">0</span></div>
+			<textarea class="form-control text-area inputwordcount"
+					  name="tag_description" id="tag_description" word-json='{"word":25,"showID":"tag_description_word","show":1}' placeholder="<?php echo trans('meta_tag'); ?> <?php echo trans("description"); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>><?php echo html_escape($post->tag_description);?></textarea>
+		</div>
+        <div class="form-group">
+            <label class="control-label"><?php echo trans('keywords'); ?> (<?php echo trans('meta_tag'); ?>)</label>
+            <textarea class="form-control text-area"
+                      name="keywords" placeholder="<?php echo trans('keywords'); ?> (<?php echo trans('meta_tag'); ?>)" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>><?php echo html_escape($post->keywords); ?></textarea>
+            <!-- <input type="text" class="form-control" name="keywords"
+                   placeholder="<?php echo trans('keywords'); ?> (<?php echo trans('meta_tag'); ?>)" value="<?php echo html_escape($post->keywords); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>> -->
+        </div>
+
+        <?php if (check_user_permission('manage_all_posts')): ?>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12 col-lang">
+                        <label><?php echo trans('visibility'); ?></label>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 col-lang">
+                        <input type="radio" id="rb_visibility_1" name="visibility" value="1" class="square-purple" <?php echo ($post->visibility == 1) ? 'checked' : ''; ?>>&nbsp;&nbsp;
+                        <label for="rb_visibility_1" class="cursor-pointer"><?php echo trans('show'); ?></label>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 col-lang">
+                        <input type="radio" id="rb_visibility_2" name="visibility" value="0" class="square-purple" <?php echo ($post->visibility == 0) ? 'checked' : ''; ?>>&nbsp;&nbsp;
+                        <label for="rb_visibility_2" class="cursor-pointer"><?php echo trans('hide'); ?></label>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <?php if ($this->general_settings->approve_updated_user_posts == 1): ?>
+                <input type="hidden" name="visibility" value="0">
+            <?php else: ?>
+                <input type="hidden" name="visibility" value="1">
+            <?php endif; ?>
+        <?php endif; ?>
+
+
+        <input type="hidden" name="is_webstory" value="1">
+
+        <div class="form-group"  style="display:none;">
+            <label class="control-label"><?php echo trans('tags'); ?></label>
+            <input id="tags_1" type="text" name="tags" class="form-control tags" value="<?php echo html_escape($tags); ?>"/>
+            <small>(<?php echo trans('type_tag'); ?>)</small>
+        </div>
+        <!-- <div class="form-group row-optional-url">
+            <label class="control-label"><?php //echo trans('optional_url'); ?></label>
+            <input type="text" class="form-control" name="optional_url" placeholder="<?php //echo trans('optional_url'); ?>" value="<?php //echo html_escape($post->optional_url); ?>" <?php //echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
+        </div> -->
+    </div>
+</div>
+
+<script>
+    var post_type = "<?php echo $post->post_type; ?>";
+    var text_select_a_result = "<?php echo trans("select_a_result"); ?>";
+    var text_result = "<?php echo trans("result"); ?>";
+</script>
