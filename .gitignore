@@ -53,5 +53,5 @@ uploads/
 uploads/*
 application/cache/*
 /vendor
-
+nbproject
 

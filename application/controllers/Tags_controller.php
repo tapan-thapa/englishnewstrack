@@ -76,11 +76,6 @@ class Tags_controller extends Admin_Core_Controller
         }else{
             //no action
         }
-        if(isset($_GET['sql']) && $_GET['sql']==1){
-            pr($this->db->queries);
-            pr($data);
-            die;
-        }
         $this->load->view('admin/includes/_header', $data);
         $this->load->view('admin/tags/add_quick_links', $data);
         $this->load->view('admin/includes/_footer');
@@ -148,12 +143,6 @@ class Tags_controller extends Admin_Core_Controller
         //get paginated posts
         $pagination = $this->paginate(admin_url() . 'tags-library-listing', $this->tag_model->get_paginated_tags_library_count());
         $data['posts'] = $this->tag_model->get_paginated_tags_library($pagination['per_page'], $pagination['offset']);
-        if(isset($_GET['sql']) && $_GET['sql']==1){
-            pr($this->selected_lang->id,"---------lang id");
-            pr($this->db->queries);
-            pr($data);
-            die;
-        }
         $this->load->view('admin/includes/_header', $data);
         $this->load->view('admin/tags/tags_liasting', $data);
         $this->load->view('admin/includes/_footer');

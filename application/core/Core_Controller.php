@@ -182,11 +182,11 @@ class Home_Core_Controller extends Core_Controller
                 set_cache_data('widgets', $this->widgets);
             }
             //random tags
-            $this->random_tags = get_cached_data('random_tags');
+            /*$this->random_tags = get_cached_data('random_tags');
             if (empty($this->random_tags)) {
                 $this->random_tags = $this->tag_model->get_random_tags();
                 set_cache_data('random_tags', $this->random_tags);
-            }
+            }*/
 
             $this->polls = $this->poll_model->get_polls();
         }
