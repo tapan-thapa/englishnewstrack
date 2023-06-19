@@ -1011,7 +1011,7 @@ class Home_controller extends Home_Core_Controller {
             $data['page_language'] = $this->selected_lang->short_form;
             $data['creator_email'] = '';
             $data['posts'] = $this->post_model->get_category_posts($data['category']->id, 200);
-            header("Content-Type: application/rss+xml; charset=utf-8");
+            header("Content-Type: application/xml; charset=utf-8");
             $this->load->view('rss/rss', $data);
         }
     }
