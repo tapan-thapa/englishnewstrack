@@ -18,8 +18,8 @@
         <?php foreach ($posts as $post): ?>
 
             <item>
-                <title><![CDATA[ <?php echo convert_to_xml_character(xml_convert($post->title)); ?> ]]></title>
-                <description><![CDATA[ <?php echo $post->summary; ?> ]]></description>
+                <title><![CDATA[ <?= $post->title; ?> ]]></title>
+                <description><![CDATA[ <?= strip_tags($post->summary); ?> ]]></description>
                 <media:content url="<?php echo get_post_image($post, "big"); ?>" type="<?php echo ($post->image_mime == 'image/gif') ? "image/gif" : "image/jpeg"; ?>" width="800" height="450"></media:content>
                 <image><![CDATA[ <?php echo get_post_image($post, "big"); ?> ]]></image>
                 <content:encoded><![CDATA[ <?php echo $post->content; ?> ]]></content:encoded>
