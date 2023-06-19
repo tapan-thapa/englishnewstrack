@@ -18,7 +18,7 @@
         <?php foreach ($posts as $post): ?>
 
             <item>
-                <title><?php echo convert_to_xml_character(xml_convert($post->title)); ?></title>
+                <title><![CDATA[ <?php echo convert_to_xml_character(xml_convert($post->title)); ?> ]]></title>
                 <description><![CDATA[ <?php echo $post->summary; ?> ]]></description>
                 <media:content url="<?php echo get_post_image($post, "big"); ?>" type="<?php echo ($post->image_mime == 'image/gif') ? "image/gif" : "image/jpeg"; ?>" width="800" height="450"></media:content>
                 <image><![CDATA[ <?php echo get_post_image($post, "big"); ?> ]]></image>
