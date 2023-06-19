@@ -995,11 +995,11 @@ class Home_controller extends Home_Core_Controller {
      * Rss By Category
      */
     public function rss_by_category($slug) {
-        get_method();
+        //get_method();
         $slug = clean_slug($slug);
         //load the library
         $this->load->helper('xml');
-        if ($this->general_settings->show_rss == 1):
+        if ($this->general_settings->show_rss == 1) {
             $data['category'] = $this->category_model->get_category_by_slug($slug);
             if (empty($data['category'])) {
                 redirect(generate_url('rss_feeds'));
@@ -1010,10 +1010,10 @@ class Home_controller extends Home_Core_Controller {
             $data['page_description'] = $this->settings->site_title . " - " . trans("title_category") . ": " . $data['category']->name;
             $data['page_language'] = $this->selected_lang->short_form;
             $data['creator_email'] = '';
-            $data['posts'] = $this->post_model->get_category_posts($data['category']->id, 1000);
+            $data['posts'] = $this->post_model->get_category_posts($data['category']->id, 200);
             header("Content-Type: application/rss+xml; charset=utf-8");
             $this->load->view('rss/rss', $data);
-        endif;
+        }
     }
 
     /**
