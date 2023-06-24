@@ -577,7 +577,7 @@ class Post_model extends CI_Model
             return array();
         }
         
-        $sql = "select DISTINCT posts.id,posts.updated_at FROM posts INNER JOIN posts_cat as c ON posts.id=c.post_id WHERE c.cat_id IN (".$category_ids.") AND c.is_deleted = 0 AND posts.is_scheduled = 0 AND posts.visibility = 1 AND posts.status = 1 AND posts.lang_id = ? AND posts.id != ? order by posts.updated_at DESC LIMIT 50";
+        $sql = "select DISTINCT posts.id,posts.updated_at FROM posts use index (UIDX_COMP3) INNER JOIN posts_cat as c ON posts.id=c.post_id WHERE c.cat_id IN (".$category_ids.") AND c.is_deleted = 0 AND posts.is_scheduled = 0 AND posts.visibility = 1 AND posts.status = 1 AND posts.lang_id = ? AND posts.id != ? order by posts.updated_at DESC LIMIT 50";
         $query = $this->db->query($sql, array(clean_number($lang_id), clean_number($post_id)));
         return $query->result();
     }
