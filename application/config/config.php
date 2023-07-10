@@ -337,7 +337,7 @@ $config['encryption_key'] = '5f634e276f8d52';
 require_once(BASEPATH . 'database/DB.php');
 $db =& DB();
 $domain_lang = 1;
-if($_SERVER['HTTP_HOST'] == "eng.newstrack.com" || $_SERVER['HTTP_HOST'] == "english-prod.newstrack.com" || $_SERVER['HTTP_HOST'] == "english.newstrack.com" /* || $_SERVER['HTTP_HOST'] == "localhost:8888" */){
+if($_SERVER['HTTP_HOST'] == "ntenglishadmin.newstrack.com" || $_SERVER['HTTP_HOST'] == "english.newstrack.com"){
     $domain_lang = 2;
 }elseif($_SERVER['HTTP_HOST'] == "apnabharat.newstrack.com" || $_SERVER['HTTP_HOST'] == "alpha.apnabharat.org" || $_SERVER['HTTP_HOST'] == "alpha-prod.apnabharat.org" || $_SERVER['HTTP_HOST'] == "apnabharat.org" /* || $_SERVER['HTTP_HOST'] == "localhost:8888" */){
     $domain_lang = 3;
