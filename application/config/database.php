@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 if ($_SERVER["HTTP_HOST"] == "localhost:8888") {
     $active_group = 'local';
-} elseif ($_SERVER["HTTP_HOST"] == "english.newstrack.com") {
+} elseif (in_array($_SERVER["HTTP_HOST"], ["english.newstrack.com", "ntenglishadmin.newstrack.com"])) {
     $active_group = 'default';
 } else {
     $active_group = 'staging';
