@@ -64,6 +64,7 @@ $route['uttar-pradesh/feed']['GET'] = 'home_controller/rss_by_category_for_jio/u
 $route['political-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/political-news';
 $route['india-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/india-news';
 $route['education-career/feed']['GET'] = 'home_controller/rss_by_category_for_jio/education-career';
+$route['health/feed']['GET'] = 'home_controller/rss_by_category_for_jio/health';
 
 #Epaper
 $route['epaper'] = 'Epaper_controller/index';
