@@ -59,6 +59,12 @@ $route['index'] = 'home_controller/index';
 $route['error-404'] = 'home_controller/error_404';
 
 
+//Static routes for JIO rss
+$route['uttar-pradesh/feed']['GET'] = 'home_controller/rss_by_category_for_jio/uttar-pradesh';
+$route['political-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/political-news';
+$route['india-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/india-news';
+$route['education-career/feed']['GET'] = 'home_controller/rss_by_category_for_jio/education-career';
+
 #Epaper
 $route['epaper'] = 'Epaper_controller/index';
 $route['epaper/(:num)'] = 'Epaper_controller/detail/$1';
@@ -91,6 +97,7 @@ $route['(:any).xml']['GET'] = 'home_controller/generate_category_feeds/$1';
 $route[$routes->rss_feeds]['GET'] = 'home_controller/rss_feeds';
 $route['rss/latest-posts']['GET'] = 'home_controller/rss_latest_posts';
 $route['rss/category/(:any)']['GET'] = 'home_controller/rss_by_category/$1';
+$route['rss/category/(:any)/feed']['GET'] = 'home_controller/rss_by_category/$1';
 $route['rss/author/(:any)']['GET'] = 'home_controller/rss_by_user/$1';
 
 //auth routes

@@ -1017,6 +1017,31 @@ class Home_controller extends Home_Core_Controller {
     }
 
     /**
+     * Rss By Category For JIO
+     */
+    public function rss_by_category_for_jio($slug) {
+        $slug = clean_slug($slug);
+        //load the library
+        $this->load->helper('xml');
+        if ($this->general_settings->show_rss == 1) {
+            $data['category'] = $this->category_model->get_category_by_slug($slug);
+            if (empty($data['category'])) {
+                redirect(generate_url('rss_feeds'));
+            }
+            $data['feed_name'] = $this->settings->site_title . " - " . trans("title_category") . ": " . $data['category']->name;
+            $data['encoding'] = 'utf-8';
+            $data['feed_url'] = lang_base_url() . $data['category']->name_slug . "/feed";
+            $data['page_description'] = $this->settings->site_title . " - " . trans("title_category") . ": " . $data['category']->name;
+            $data['page_language'] = $this->selected_lang->short_form;
+            $data['creator_email'] = '';
+            $data['generator'] = lang_base_url();
+            $data['posts'] = $this->post_model->get_category_posts($data['category']->id, 200);
+            header("Content-Type: application/xml; charset=utf-8");
+            $this->load->view('rss/rss_for_jio', $data);
+        }
+    }
+
+    /**
      * Rss By User
      */
     public function rss_by_user($slug) {
