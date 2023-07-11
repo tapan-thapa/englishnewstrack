@@ -60,12 +60,7 @@ $route['error-404'] = 'home_controller/error_404';
 
 
 //Static routes for JIO rss
-$route['uttar-pradesh/feed']['GET'] = 'home_controller/rss_by_category_for_jio/uttar-pradesh';
-$route['political-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/political-news';
-$route['india-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/india-news';
-$route['education-career/feed']['GET'] = 'home_controller/rss_by_category_for_jio/education-career';
-$route['health/feed']['GET'] = 'home_controller/rss_by_category_for_jio/health';
-$route['world-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/world-news';
+$route['(:any)/feed']['GET'] = 'home_controller/rss_by_category_for_jio/$1';
 
 #Epaper
 $route['epaper'] = 'Epaper_controller/index';
