@@ -89,7 +89,7 @@ class Core_Controller extends CI_Controller
         if (empty($this->general_settings->aws_bucket)) {
             $this->aws_base_url = $this->general_settings->aws_base_url;
         }
-        if(strpos($this->general_settings->aws_base_url,"digitaloceanspaces") !== false){
+        if(strpos($this->general_settings->aws_base_url,"digitaloceanspaces") !== false || strpos($this->general_settings->aws_base_url,"static.newstrack.com") !== false){
             $this->aws_base_url = $this->general_settings->aws_base_url;
         }
     }
