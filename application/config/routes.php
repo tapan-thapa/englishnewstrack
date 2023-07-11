@@ -65,6 +65,7 @@ $route['political-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/
 $route['india-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/india-news';
 $route['education-career/feed']['GET'] = 'home_controller/rss_by_category_for_jio/education-career';
 $route['health/feed']['GET'] = 'home_controller/rss_by_category_for_jio/health';
+$route['world-news/feed']['GET'] = 'home_controller/rss_by_category_for_jio/world-news';
 
 #Epaper
 $route['epaper'] = 'Epaper_controller/index';
